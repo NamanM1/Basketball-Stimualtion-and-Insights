@@ -3,13 +3,20 @@ library(shinyjs)
 
 ui <- fluidPage(
   
-  useShinyjs(), 
+  useShinyjs(),
+  
+  style = "background-color: #FFF6F6;",
+  div(
+    style = "color: #F875AA; font-size: 32px; font-family: Algerian;",
+    "Basketball Game Stimulator"
+  ),
   
   fluidRow(
     column(
       width = 3,
       wellPanel(
-        h4("Team A"),
+          style = "background-color: #FFDFDF;",
+        h4("Team A", style = "font-weight: bold; font-size: 22px;"),
         selectizeInput(
           inputId = "FirstPlayer_A",
           label   = "Player 1",
@@ -49,23 +56,29 @@ ui <- fluidPage(
     
     column(
       width = 6,
-      align = "right",
+      align = 'right',
       mainPanel(
         uiOutput("scoreboard"),
           actionButton(
             inputId = "Stimulation",
-            label = "Stimulate"
+            label = "Stimulate",
+            style = "background-color: #40F8FF; color: white; font-size: 20px; font-weight: bold; font-family: Comic Sans MS",
           ),
-         tableOutput("table_output"),
-         textOutput("Winner")
+
+        tableOutput("table_output"),
+        tags$div(
+          style = "color: red; font-size: 24px; font-family: Times New Roman; margin-top: 30px;",  # Adjust the style and margin as needed
+          textOutput("Winner")
+        )
       )
   ),
-    
+  
     
     column(
       width = 3,
       wellPanel(
-        h4("Team B"),
+        style = "background-color: #FFDFDF;",
+        h4("Team B", style = "font-weight: bold; font-size: 22px;"),
         selectizeInput(
           inputId = "FirstPlayer_B",
           label   = "Player 1",
@@ -196,7 +209,7 @@ server <- function(input, output, session) {
     
     table_output <- renderTable({
       quarter_scores
-    })
+    }, striped = TRUE, bordered = TRUE)
   })
   
   
@@ -204,7 +217,7 @@ server <- function(input, output, session) {
   player_Score <- function(name){
     player <- top_50[top_50$Player == name,]
     
-   R1 <- runif(1, -5, 5)
+   R1 <- runif(1, -7, 7)
     
     score <- (
       ((player$PTS + R1) * weights["Points"]) +
@@ -247,18 +260,18 @@ server <- function(input, output, session) {
   }
   
   if (sum(quarter_scores$TeamA) == 3 || sum(quarter_scores$TeamB) == 3) {
-      q <- 5  # If one team has already won 3 quarters, skip the 4th quarter
-    } else {
-      q <- q + 1
-    }
-    
+    q <- 5  # If one team has already won 3 quarters, skip the 4th quarter
+  } else {
+    q <- q + 1
   }
+  
+}
 
    
   # Update the table output
   output$scoreboard <- renderTable({
     quarter_scores
-  })
+  },striped = TRUE, bordered = TRUE)
   
   if(sum(quarter_scores$TeamA) > sum(quarter_scores$TeamB))
     {
