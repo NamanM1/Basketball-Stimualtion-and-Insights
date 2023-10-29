@@ -246,7 +246,12 @@ server <- function(input, output, session) {
     quarter_scores[quarter_scores$Quarter == q, "TeamB"] <- 0
   }
   
-  q <- q + 1
+  if (sum(quarter_scores$TeamA) == 3 || sum(quarter_scores$TeamB) == 3) {
+      q <- 5  # If one team has already won 3 quarters, skip the 4th quarter
+    } else {
+      q <- q + 1
+    }
+    
   }
 
    
