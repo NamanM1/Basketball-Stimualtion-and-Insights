@@ -8,7 +8,7 @@ ui <- fluidPage(
   style = "background-color: #FFF6F6;",
   div(
     style = "color: #F875AA; font-size: 32px; font-family: Algerian;",
-    "Basketball Game Stimulator"
+    "Basketball Game Simulator"
   ),
   
   fluidRow(
@@ -61,7 +61,7 @@ ui <- fluidPage(
         uiOutput("scoreboard"),
           actionButton(
             inputId = "Stimulation",
-            label = "Stimulate",
+            label = "Simulate",
             style = "background-color: #40F8FF; color: white; font-size: 20px; font-weight: bold; font-family: Comic Sans MS",
           ),
 
