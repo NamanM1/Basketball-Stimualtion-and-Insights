@@ -218,29 +218,7 @@ ui <- dashboardPage(
                 )
               ),
               
-              fluidRow(
-                useShinyjs(),
-                style = "background-color: #FFF6F6;",
-                
-                column(
-                  width = 3,
-                  wellPanel(
-                    style = "background-color:#FFDFDF ;",
-                    selectInput(
-                      inputId = "variable",
-                      label = "SELECT VARIABLE",
-                      choices = names(Team_database)
-                    )
-                  )
-                ),
-                
-                column(
-                  width = 9,
-                  mainPanel(
-                    plotOutput("best_team_plot")
-                  )
-                )
-              )
+              
       ),
       
      
@@ -264,7 +242,32 @@ ui <- dashboardPage(
                   plotOutput("SpiderMap2.o")
                 )
               )
+            ),
+            
+            fluidRow(
+              useShinyjs(),
+              style = "background-color: #FFF6F6;",
+              
+              column(
+                width = 3,
+                wellPanel(
+                  style = "background-color:#FFDFDF ;",
+                  selectInput(
+                    inputId = "variable",
+                    label = "SELECT VARIABLE",
+                    choices = names(Team_database)
+                  )
+                )
+              ),
+              
+              column(
+                width = 9,
+                mainPanel(
+                  plotOutput("best_team_plot")
+                )
+              )
             )
+            
     )
   
 )
@@ -515,5 +518,9 @@ server <- function(input, output, session) {
     best_team(input$variable)
   })
 }
+
+
+
+
 
 shinyApp(ui, server)
