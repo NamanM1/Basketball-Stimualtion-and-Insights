@@ -3,7 +3,7 @@ library(shinyjs)
 library(shinydashboard)
 library(fresh)
 library(ggplot2)
-
+library(dplyr)
 
 load("Player_database.Rdata")
 load("top_50.Rdata")
