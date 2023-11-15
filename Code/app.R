@@ -34,7 +34,8 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Team Analysis", tabName = "page1"),
       menuItem("Player Analysis", tabName = "page2"),
-      menuItem("Simulation", tabName = "page3")
+      menuItem("Simulation", tabName = "page3"),
+      menuItem("Comparison", tabName = "page4")
     )
   ),
   dashboardBody(
@@ -228,26 +229,30 @@ ui <- dashboardPage(
       
      
     tabItem(tabName = "page1",
-            fluidPage(
-              
+            fluidRow(
               useShinyjs(),
               style = "background-color: #FFF6F6;",
               
-              sidebarLayout(
-                sidebarPanel(
+              column(
+                width = 3,
+                wellPanel(
                   style = "background-color:#FFDFDF ;",
                   selectInput(
-                    inputId  = "Teams",
-                    label    = "SELECT TEAM",
-                    choices  = unique(Player_database$Tm)
+                    inputId = "Teams",
+                    label = "SELECT TEAM",
+                    choices = unique(Player_database$Tm)
                   )
-                ),
-                
+                )
+              ),
+              
+              column(
+                width = 9,
                 mainPanel(
                   plotOutput("SpiderMap2.o")
                 )
               )
             ),
+            
             
             fluidRow(
               useShinyjs(),
@@ -273,7 +278,34 @@ ui <- dashboardPage(
               )
             )
             
-    )
+    ),
+    
+    tabItem(tabName = "page4",
+            fluidPage(
+              
+              useShinyjs(),
+              style = "background-color: #FFF6F6;",
+              
+              sidebarLayout(
+                sidebarPanel(
+                  style = "background-color:#FFDFDF ;",
+                  selectInput(
+                    inputId  = "Team_1",
+                    label    = "SELECT FIRST TEAM",
+                    choices  = unique(Player_database$Tm)
+                  ),
+                  selectInput(
+                    inputId  = "Team_2",
+                    label    = "SELECT SECOND TEAM",
+                    choices  = unique(Player_database$Tm)
+                  ),
+                ),
+                
+                mainPanel(
+                  plotOutput("SpiderMap3.0")
+                )
+              )
+            ))
   
 )
 ))
@@ -522,10 +554,38 @@ server <- function(input, output, session) {
   output$best_team_plot <- renderPlot({
     best_team(input$variable)
   })
+  
+  Team_database1 = Player_database %>% group_by(Tm) %>% summarise(Points = sum(PTS), Rebounds = sum(TRB), Turnovers = sum(TOV), Assists = sum(AST), Steals = sum(STL))
+  h = as.data.frame(scale(Team_database1[,-c(1)]))
+  h$Tm = Team_database1$Tm
+  
+  radial_plot_teams = function(name1, name2) {
+    k1 = as.data.frame(t(h[h$Tm == name1,]))
+    k1 = as.data.frame(k1)
+    k1$Category = row.names(k1)
+    colnames(k1) = c("Value", 'Category')
+    k1$Team = name1
+    
+    k2 = as.data.frame(t(h[h$Tm == name2,]))
+    k2 = as.data.frame(k2)
+    k2$Category = row.names(k2)
+    colnames(k2) = c("Value", 'Category')
+    k2$Team = name2
+    
+    combined_data = rbind(k1, k2)
+    
+    plot <- ggplot(combined_data, aes(x = Category, y = Value, fill = Team)) +
+      geom_bar(stat = "identity", position = "dodge") +
+      coord_polar(start = 0) +
+      labs(title = paste(name1, " vs ", name2))
+    
+    return(plot)
+  }
+  
+  output$SpiderMap3.0 <- renderPlot({
+    radial_plot <- radial_plot_teams(input$Team_1, input$Team_2)
+    print(radial_plot)
+  })
 }
-
-
-
-
 
 shinyApp(ui, server)
