@@ -430,6 +430,30 @@ And the top the players who got the most votes for MVP Award in NBA season 2022-
 
 ------------------------------------------------------------------------
 
+# Game Stimulation {#game}
+<br>
+
+For Game Stimulation, Two teams were allowed to take 5 players each alternatively,
+
+After that a random number was generated between -7 to 7
+
+and this random number was added to the season averages of the first team,
+
+This was followed up by the calculation of Game Score,
+
+$$
+Game\,Score = 0.6* Points \, + \, 0.2* Assists \, + 0.2 * Rebounds \, + \, 0.1 * Steals - 0.1*Turnovers
+$$
+
+The above process was repeated to calculate the Game Score of Team B
+
+The team whose Game Score was higher won the quater
+
+and the team who won more quaters out of 4 won the game.
+
+
+------------------------------------------------------------------------
+
 # Results {#results}
 
 <br>
