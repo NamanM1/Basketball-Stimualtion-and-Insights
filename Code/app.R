@@ -514,7 +514,7 @@ server <- function(input, output, session) {
   Player_database$STL = as.double(Player_database$STL)
   Player_database$TOV = as.double(Player_database$TOV)
   
-  Team_database = Player_database %>% group_by(Tm) %>% summarise(Points = sum(PTS) , Rebounds = sum(TRB) , Turnovers = sum(TOV) , Assists = sum(AST) , Steals = sum(STL) ) 
+  Team_database = Player_database %>% group_by(Tm) %>% summarise(Points = mean(PTS) , Rebounds = mean(TRB) , Turnovers = mean(TOV) , Assists = mean(AST) , Steals = mean(STL) ) 
   h = as.data.frame(scale(Team_database[,-c(1)]))
   h$Tm = Team_database$Tm
   radial_plot_team = function(name){
@@ -544,7 +544,7 @@ server <- function(input, output, session) {
     scetterploter(input$x_variable, input$y_variable, input$color, input$size)
   })
   
-  Team_database = Player_database %>% group_by(Tm) %>% summarise(Points = sum(PTS) , Rebounds = sum(TRB) , Turnovers = sum(TOV) , Assists = sum(AST) , Steals = sum(STL) , FG = sum(FG)/sum(FGA)  , Three_Point. = sum(`3P`)/sum(`3PA`) ) 
+  Team_database = Player_database %>% group_by(Tm) %>% summarise(Points = mean(PTS) , Rebounds = mean(TRB) , Turnovers = mean(TOV) , Assists = mean(AST) , Steals = mean(STL) , FG = sum(FG)/sum(FGA)  , Three_Point. = sum(`3P`)/sum(`3PA`) ) 
   best_team = function(category){
     m=Team_database[order(Team_database[[category]] , decreasing = TRUE),][1:10, ]
     ggplot(m , aes(x = Tm, y = !!sym(category))) + geom_bar(stat="identity" , fill = "skyblue") + xlab("Teams") + ylab("Points")
@@ -555,7 +555,7 @@ server <- function(input, output, session) {
     best_team(input$variable)
   })
   
-  Team_database1 = Player_database %>% group_by(Tm) %>% summarise(Points = sum(PTS), Rebounds = sum(TRB), Turnovers = sum(TOV), Assists = sum(AST), Steals = sum(STL))
+  Team_database1 = Player_database %>% group_by(Tm) %>% summarise(Points = mean(PTS), Rebounds = mean(TRB), Turnovers = mean(TOV), Assists = mean(AST), Steals = mean(STL))
   h = as.data.frame(scale(Team_database1[,-c(1)]))
   h$Tm = Team_database1$Tm
   
@@ -573,6 +573,7 @@ server <- function(input, output, session) {
     k2$Team = name2
     
     combined_data = rbind(k1, k2)
+    combined_data = combined[-c(6,12),]
     
     plot <- ggplot(combined_data, aes(x = Category, y = Value, fill = Team)) +
       geom_bar(stat = "identity", position = "dodge") +
