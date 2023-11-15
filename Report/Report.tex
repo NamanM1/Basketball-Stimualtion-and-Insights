@@ -1,0 +1,319 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Basketball Simulation and Insights},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Basketball Simulation and Insights}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\{=html\}
+
+Members
+
+Nandini Bhattad 220693
+
+Ankita Goyal 231080016
+
+Gunavant Thakare 231080040
+
+Naman Manchanda 231080061
+
+Dr.~Dootika Vats
+
+Data Science Lab 1
+
+\hypertarget{acknowledgments}{%
+\section{Acknowledgments}\label{acknowledgments}}
+
+I would like to express my sincere gratitude to Dr.~Dootika Vats for her
+invaluable guidance and support throughout the Data Science Lab 1
+project. Her expertise and mentorship have played a pivotal role in
+shaping the direction of this project.
+
+Dr.~Vats' insightful feedback, encouragement, and dedication to
+fostering a collaborative learning environment have been instrumental in
+enhancing my understanding of data science concepts and methodologies.
+
+I am truly thankful for the opportunity to work under Dr.~Vats'
+supervision, and I appreciate her commitment to excellence in teaching
+and research. This project has been a rewarding experience, largely due
+to her mentorship.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{table-of-contents}{%
+\section{Table of Contents}\label{table-of-contents}}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{introduction}{1. Introduction}
+\item
+  \protect\hyperlink{methodology}{2. Methodology}
+\item
+  \protect\hyperlink{data}{3. Data}
+\item
+  \protect\hyperlink{analysis}{4. Analysis}
+\item
+  \protect\hyperlink{results}{3. Results and Conclusion}
+\item
+  \protect\hyperlink{references}{References}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The Basketball Simulation and Insights project delve into the dynamic
+world of basketball analytics, aiming to leverage data science
+methodologies to gain valuable insights into player performance, team
+strategies, and game outcomes. Basketball, as a highly dynamic and
+fast-paced sport, generates a wealth of data during each match, from
+player statistics to in-game events, providing a rich landscape for
+analysis.
+
+The primary objective of this project is to develop a comprehensive
+basketball simulation model that can replicate real-game scenarios,
+allowing us to study various factors influencing team and player
+performance. By harnessing the power of data science and statistical
+modeling, we seek to unravel patterns, trends, and key indicators that
+contribute to success on the basketball court.
+
+In addition to the simulation aspect, this project aims to provide
+actionable insights for coaches, analysts, and enthusiasts. Through
+exploratory data analysis and machine learning techniques, we aspire to
+identify critical performance metrics, strategic plays, and potential
+areas for improvement. The insights derived from this project have the
+potential to inform coaching decisions, optimize player training
+regimens, and contribute to a deeper understanding of the sport.
+
+The project will encompass a diverse range of data sources, including
+player statistics, game play-by-plays, and team dynamics. Our analytical
+approach will involve data cleaning, feature engineering, and the
+implementation of machine learning algorithms to model and simulate
+basketball scenarios.
+
+As we embark on this basketball analytics journey, we anticipate
+uncovering new perspectives on the sport, fostering innovation in
+coaching strategies, and contributing to the growing field of sports
+analytics. The combination of simulation and insights aims to not only
+enhance our understanding of basketball dynamics but also provide
+practical applications for teams and enthusiasts passionate about the
+game.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{methodology}{%
+\section{Methodology}\label{methodology}}
+
+\hypertarget{data-collection}{%
+\subsubsection{Data Collection}\label{data-collection}}
+
+The foundation of this project involves the extraction of comprehensive
+player statistics from the NBA 2022-23 season. We employed web scraping
+techniques to gather data from the Basketball Reference website
+(\url{https://www.basketball-reference.com}). The website provides
+detailed and up-to-date information on NBA player statistics, team
+performance, and game results.
+
+\hypertarget{data-source}{%
+\subsubsection{Data Source}\label{data-source}}
+
+The primary data source for this project was the individual player
+statistics pages on Basketball Reference. We focused on collecting
+information for all 679 players who participated in the NBA during the
+2022-23 season.
+
+\hypertarget{web-scraping}{%
+\subsubsection{Web Scraping}\label{web-scraping}}
+
+We utilized the \texttt{rvest} package in R for web scraping, allowing
+us to programmatically extract player statistics. The scraping process
+involved navigating through player pages, retrieving summary statistics,
+and storing the data for further analysis.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{data}{%
+\section{Data}\label{data}}
+
+The following variables were used, Rk (Rank): The player's rank or
+position in the specified context, often indicating their rank among all
+players in a certain category or statistical measure.
+
+Player: The name of the basketball player.
+
+Pos (Position): The player's position on the basketball court, such as
+guard (G), forward (F), or center (C).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Age: The age of the player during the specified season.
+\item
+  Tm (Team): The abbreviation or code representing the team the player
+  is associated with during the specified season.
+\item
+  G (Games Played): The number of games the player participated in
+  during the season.
+\item
+  GS (Games Started): The number of games in which the player was in the
+  starting lineup.
+\item
+  MP (Minutes Per Game): The average number of minutes the player spent
+  on the court per game.
+\item
+  FG (Field Goals Made): The total number of successful field goals made
+  by the player.
+\item
+  FGA (Field Goals Attempted): The total number of field goal attempts
+  by the player.
+\item
+  FG\% (Field Goal Percentage): The shooting accuracy of the player,
+  calculated as (FG / FGA) * 100.
+\item
+  3P (Three-Pointers Made): The total number of successful three-point
+  shots made by the player.
+\item
+  3PA (Three-Pointers Attempted): The total number of three-point shot
+  attempts by the player.
+\item
+  3P\% (Three-Point Percentage): The three-point shooting accuracy of
+  the player, calculated as (3P / 3PA) * 100.
+\item
+  2P (Two-Pointers Made): The total number of successful two-point field
+  goals made by the player.
+\item
+  2PA (Two-Pointers Attempted): The total number of two-point field goal
+  attempts by the player.
+\item
+  2P\% (Two-Point Percentage): The two-point shooting accuracy of the
+  player, calculated as (2P / 2PA) * 100.
+\item
+  eFG\% (Effective Field Goal Percentage): A modified field goal
+  percentage that accounts for the added value of three-pointers,
+  calculated as (FG + 0.5 * 3P) / FGA * 100.
+\item
+  FT (Free Throws Made): The total number of successful free throws made
+  by the player.
+\item
+  FTA (Free Throws Attempted): The total number of free throw attempts
+  by the player.
+\item
+  FT\% (Free Throw Percentage): The free throw shooting accuracy of the
+  player, calculated as (FT / FTA) * 100.
+\item
+  ORB (Offensive Rebounds): The total number of offensive rebounds
+  grabbed by the player.
+\item
+  DRB (Defensive Rebounds): The total number of defensive rebounds
+  grabbed by the player.
+\item
+  TRB (Total Rebounds): The total number of rebounds (both offensive and
+  defensive) grabbed by the player.
+\item
+  AST (Assists): The total number of assists made by the player.
+\item
+  STL (Steals): The total number of steals made by the player.
+\item
+  BLK (Blocks): The total number of shots blocked by the player.
+\item
+  TOV (Turnovers): The total number of turnovers committed by the
+  player.
+\item
+  PF (Personal Fouls): The total number of personal fouls committed by
+  the player.
+\item
+  PTS (Points): The total number of points scored by the player.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{analysis}{%
+\section{Analysis}\label{analysis}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{Basketball Reference.} (n.d.). Retrieved from
+  \url{https://www.basketball-reference.com}
+\item
+  \emph{NBA Official Website.} (n.d.). Retrieved from
+  \url{https://www.nba.com}
+\end{enumerate}
+
+\end{document}
